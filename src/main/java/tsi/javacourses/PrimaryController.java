@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableView;
 
 public class PrimaryController {
 
@@ -13,6 +14,8 @@ public class PrimaryController {
     public Spinner<Integer> num2;
     public Spinner<Integer> num3;
     public Spinner<Integer> num4;
+    public TableView<Turn> turnsTable;
+
 
     public void doTurn() {
 
@@ -26,6 +29,7 @@ public class PrimaryController {
         turn.setNr(count);
         turn.setGuess("" + n1 + n2 + n3 + n4);
 
+        turnsTable.getItems().add(0,turn);
 
         System.out.printf("%d %d %d %d %n", n1, n2, n3, n4);
 
