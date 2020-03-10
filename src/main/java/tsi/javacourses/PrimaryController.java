@@ -62,16 +62,70 @@ public class PrimaryController {
         int n3 = num3.getValue();
         int n4 = num4.getValue();
 
-        List<Integer> userNumber = List.of(n1,n2,n3,n4);
+        List<Integer> userNumber = List.of(n1, n2, n3, n4);
 
+//        int cows = calculateCows(userNumber);
+//       int bulls = calculateBulls(userNumber);
 
         var turn = new Turn();
+        calculateCowsAndBulls(userNumber, turn);
         turn.setNr(count);
         turn.setGuess("" + n1 + n2 + n3 + n4);
+
+//        turn.setBulls(bulls);
+//        turn.setCows(cows);
 
         turnsTable.getItems().add(0, turn);
 
         System.out.printf("%d %d %d %d %n", n1, n2, n3, n4);
 
     }
+
+    private void calculateCowsAndBulls(List<Integer> userNumber, Turn turn) {
+        int bulls = 0;
+        int cows = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                int mn = myNumbers.get(i);
+                int un = userNumber.get(j);
+                if (un == mn) {
+                    if (i == j) {
+                        bulls++;
+                    } else {
+                        cows++;
+                    }
+                }
+            }
+        }
+        turn.setBulls(bulls);
+        turn.setCows(cows);
+    }
+
+//    private int calculateBulls(List<Integer> userNumber) {
+//        int bulls = 0;
+//        for (int i = 0; i < 4; i++) {
+//            int un = userNumber.get(i);
+//            int mn = myNumbers.get(i);
+//            if (un == mn) {
+//                bulls++;
+//            }
+//        }
+//        return bulls;
+//    }
+//
+//    private int calculateCows(List<Integer> userNumber) {
+//        int cows = 0;
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j <4; j++) {
+//                int un = userNumber.get(i);
+//                int mn = myNumbers.get(i);
+//                if (un == mn && !(i==j)) {
+//                    cows++;
+//                }
+//            }
+//
+//        }
+//        return cows;
+//    }
+
 }
