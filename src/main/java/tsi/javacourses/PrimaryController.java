@@ -79,7 +79,9 @@ public class PrimaryController {
         if (turn.getBulls() == 4) {
             App.setRoot("secondary");
         }
-
+//        if (count == 10) {
+//
+//        }
     }
 
     private void updateCowsAndBulls(List<Integer> userNumber, Turn turn) {
