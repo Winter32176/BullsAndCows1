@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.*;
 
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableView;
@@ -55,7 +53,7 @@ public class PrimaryController {
         System.out.println(myNumbers);
     }
 
-    public void doTurn() {
+    public void doTurn() throws IOException {
         count++;
         int n1 = num1.getValue();
         int n2 = num2.getValue();
@@ -68,7 +66,7 @@ public class PrimaryController {
 //       int bulls = calculateBulls(userNumber);
 
         var turn = new Turn();
-        calculateCowsAndBulls(userNumber, turn);
+        updateCowsAndBulls(userNumber, turn);
         turn.setNr(count);
         turn.setGuess("" + n1 + n2 + n3 + n4);
 
@@ -78,10 +76,13 @@ public class PrimaryController {
         turnsTable.getItems().add(0, turn);
 
         System.out.printf("%d %d %d %d %n", n1, n2, n3, n4);
+        if (turn.getBulls() == 4) {
+            App.setRoot("secondary");
+        }
 
     }
 
-    private void calculateCowsAndBulls(List<Integer> userNumber, Turn turn) {
+    private void updateCowsAndBulls(List<Integer> userNumber, Turn turn) {
         int bulls = 0;
         int cows = 0;
         for (int i = 0; i < 4; i++) {
@@ -99,6 +100,7 @@ public class PrimaryController {
         }
         turn.setBulls(bulls);
         turn.setCows(cows);
+
     }
 
 //    private int calculateBulls(List<Integer> userNumber) {
